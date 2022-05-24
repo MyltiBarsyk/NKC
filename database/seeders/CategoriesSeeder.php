@@ -1,0 +1,25 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Category;
+use Illuminate\Database\Seeder;
+
+class CategoriesSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $categories = [
+            ['name' => 'Uncategorized'],
+            ['name' => 'MarsInvaders'],
+            ['name' => 'News'],
+        ];
+
+        Category::insert($categories);
+    }
+}
