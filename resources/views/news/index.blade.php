@@ -36,6 +36,7 @@
                                 <img alt="" src="/storage/{{ $item->image }}">
                             </div>
                             <div class="post-text">
+                                <p><a href="/news/edit/{{ $item->id }}">Edit</a></p>
                                 <span class="p-tagline">{{ $item->category->name }}</span>
                                 <h4><a href="/news/{{ $item->id }}">{{  $item->title }}<span></span></a></h4>
                                 <p>{{ $item->description }}</p>

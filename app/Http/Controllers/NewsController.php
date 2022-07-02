@@ -19,12 +19,14 @@ class NewsController extends Controller
 
     public function create()
     {
+        $this->authorize('create', News::class); // Проверяем права пользователя через Policy
         $categories = Category::all(); // достаём категории
         return view('news.create', compact('categories')); // Отрисовываем шаблон страницы создания новости, и передаём в компактом массиве под переменной 'categories'
     }
 
     public function store(StoreNewsRequest $request) // Метод принимает свойством класс с валидацией содержимого
     {
+        $this->authorize('update', News::class); // Проверяем права пользователя через Policy
         $data = $request->except('image'); // Возвращает массив с проверенными данными в переменную $data кроме image
         $imagePath = $request->file('image')->store('news', 'public'); // Из проверенных данных берём файл, указанный в поле image и вызываем метод сохранения файл. Метод возвращает путь до сохраненного файла
         $news = News::create($data + ['image' => $imagePath]); // Создаёем новость с проверенными данными из формы
@@ -34,6 +36,13 @@ class NewsController extends Controller
     public function show(News $news) // Показывает одну новость, переменная с классом в аргументах ищет запись в базе по первичному ключу
     { 
        return view('news.show', compact('news')); // // Отрисовываем шаблон странички с новостью. Compact - передаёт компактный массив по переменной 'news'
+    }
+    
+    public function edit(News $news) //Редактирвоание новости
+    {
+        $this->authorize('update', $news);
+        $categories = Category::all();
+        return view('news.edit', compact('news', 'categories'));
     }
 }
 

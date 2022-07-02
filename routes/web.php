@@ -28,12 +28,13 @@ Route::get('/contact', function() {
 });
 
 Route::get('/news', [NewsController::class, 'index']);
-Route::get('/news/create', [NewsController::class, 'create']);
+Route::get('/news/create', [NewsController::class, 'create'])->middleware('auth'); //Проверка авторизованного
+Route::get('/news/edit/{news}', [NewsController::class, 'edit'])->middleware('auth'); //Проверка авторизованного
 Route::get('/news/{news}', [NewsController::class, 'show']);
-Route::post('/news', [NewsController::class, 'store']);
+Route::post('/news', [NewsController::class, 'store'])->middleware('auth');
 
 Route::post('/contact', [MessageController::class, 'store']);
 
-Auth::routes();
+Auth::routes(); //Отключить регистрацию (['register' => false])
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -47,8 +47,14 @@
                 </div>
                 <div class="topbar-right">
                     <div class="topbar-right">
+                        @auth
+                         <form id="logout" action="/logout" method="post">@csrf {{--Токен для зашиты данных--}}
+                            <span class="topbar-widget"><a href="#" class="logout_button">Logout</a></span>
+                        </form> 
+                        @else
                         <span class="topbar-widget"><a href="/login">Login</a></span>
-                        <span class="topbar-widget"><a href="/register">Register</a></span>
+                        <span class="topbar-widget"><a href="/register">Register</a></span>    
+                        @endauth                        
                         <span class="topbar-widget"><a href="#">FAQ</a></span>
                     </div>
                 </div>
